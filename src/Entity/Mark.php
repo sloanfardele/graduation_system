@@ -4,7 +4,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Mark
@@ -12,90 +12,110 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="App\Repository\MarkRepository")
  * @ORM\Table()
  */
-class Mark {
-	/**
-	 * @ORM\Column(type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="AUTO")
-	 */
-	private $id;
+class Mark
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $value;
+    /**
+     * @ORM\Column(type="float")
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 20,
+     *      minMessage = "The mark have to be at least {{ limit }}",
+     *      maxMessage = "The mark have to be at maximum {{ limit }}"
+     * )
+     */
+    private $value;
 
-	/**
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $subject;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $subject;
 
-	/**
-	 * @ORM\Column(type="integer")
-	 */
-	private $studentId;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $studentId;
 
-	/**
-	 * @return mixed
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * @return mixed
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
-	/**
-	 * @param mixed $id
-	 */
-	public function setId($id): void {
-		$this->id = $id;
-	}
+    /**
+     * @param mixed $id
+     * @return Mark
+     */
+    public function setId($id): Mark
+    {
+        $this->id = $id;
 
-	/**
-	 * @return mixed
-	 */
-	public function getValue() {
-		return $this->value;
-	}
+        return $this;
+    }
 
-	/**
-	 * @param mixed $value
-	 */
-	public function setValue($value): void {
-		if ($value > 20) {
-			$value = 20;
-		}
+    /**
+     * @return mixed
+     */
+    public function getValue(): float
+    {
+        return $this->value;
+    }
 
-		if ($value < 0) {
-			$value = 0;
-		}
+    /**
+     * @param mixed $value
+     * @return Mark
+     */
+    public function setValue($value): Mark
+    {
+        $this->value = $value;
 
-		$this->value = $value;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return mixed
-	 */
-	public function getSubject() {
-		return $this->subject;
-	}
+    /**
+     * @return mixed
+     */
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
 
-	/**
-	 * @param mixed $subject
-	 */
-	public function setSubject($subject): void {
-		$this->subject = $subject;
-	}
+    /**
+     * @param mixed $subject
+     * @return Mark
+     */
+    public function setSubject($subject): Mark
+    {
+        $this->subject = $subject;
 
-	/**
-	 * @return mixed
-	 */
-	public function getStudentId() {
-		return $this->studentId;
-	}
+        return $this;
+    }
 
-	/**
-	 * @param mixed $studentId
-	 */
-	public function setStudentId($studentId): void {
-		$this->studentId = $studentId;
-	}
+    /**
+     * @return mixed
+     */
+    public function getStudentId(): int
+    {
+        return $this->studentId;
+    }
+
+    /**
+     * @param mixed $studentId
+     * @return Mark
+     */
+    public function setStudentId($studentId): Mark
+    {
+        $this->studentId = $studentId;
+
+        return $this;
+    }
 }
