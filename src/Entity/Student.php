@@ -3,8 +3,8 @@
 
 namespace App\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -31,76 +31,84 @@ class Student
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\Date
+     * @var string A "Y-m-d" formatted value
      */
     private $birthDate;
-
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
      * @param mixed $id
+     * @return Student
      */
-    public function setId($id): void
+    public function setId($id): Student
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
     /**
      * @param mixed $lastName
+     * @return Student
      */
-    public function setLastName($lastName): void
+    public function setLastName($lastName): Student
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
     /**
      * @param mixed $firstName
+     * @return Student
      */
-    public function setFirstName($firstName): void
+    public function setFirstName($firstName): Student
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getBirthDate()
+    public function getBirthDate(): string
     {
         return $this->birthDate;
     }
 
     /**
      * @param mixed $birthDate
+     * @return Student
      */
-    public function setBirthDate($birthDate): void
+    public function setBirthDate($birthDate): Student
     {
-        //TODO : faire attention à la gestion du format de date
-        if (is_string($birthDate)) {
-            $birthDate = DateTime::createFromFormat("j/m/Y", $birthDate);
-        }
-
         $this->birthDate = $birthDate;
+
+        return $this;
     }
 }
