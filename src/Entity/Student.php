@@ -30,7 +30,7 @@ class Student
     private $firstName;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string")
      * @Assert\Date
      * @var string A "Y-m-d" formatted value
      */
