@@ -4,9 +4,7 @@ namespace App\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Mark;
-use Doctrine\ORM\Mapping;
 
 class MarkRepository extends ServiceEntityRepository
 {
